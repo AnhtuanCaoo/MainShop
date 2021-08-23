@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Validator;
 
 class JuiceController extends Controller
 {
-    
     public function index(){
         return view('juices.index');
     }

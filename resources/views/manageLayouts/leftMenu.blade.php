@@ -97,16 +97,6 @@
                       </li>
                     </ul>
                   </li>
-                  <li class="nav-item ">
-                    <form  class="nav-link"method="POST" action="{{ route('logout') }}">
-                      @csrf
-                      <x-dropdown-link :href="route('logout')"
-                              onclick="event.preventDefault();
-                                          this.closest('form').submit();">
-                          {{ __('Đăng xuất') }}
-                      </x-dropdown-link>
-                  </form>
-                  </li>
                 </ul>
               </nav>
               <!-- /.sidebar-menu -->
