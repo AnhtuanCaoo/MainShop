@@ -27,10 +27,16 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Image url:</strong>
-                    <input required type="text" name="image" id='image' class="form-control">
-                </div>
+                <strong>Image:</strong>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                      <a id="lfm" data-input="image" data-preview="holder" class="btn btn-primary">
+                        <i class="fa fa-picture-o"></i> Image
+                      </a>
+                    </span>
+                    <input id="image" class="form-control" type="text" name="filepath" value="{{ old('thumbnail') }}">
+                  </div>
+                  <div id="holder" style="margin-top:15px;max-height:100px;"></div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -149,17 +155,24 @@
                 <h5 class="modal-title" id="exampleModalLabel">Delete Juice</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <h4>U sure 'bout that bro ??</h4>
-                <input type="hidden" id="deleteing_id">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary delete_juice">Yes!</button>
-            </div>
+                @isATC
+                    <div id="warning" class="modal-body">
+                        <h4>U sure 'bout that bro ??</h4>
+                        <input type="hidden" id="deleteing_id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary delete_juice">Yes!</button>
+                    </div>
+                
+                @else
+                    <div id="warning" class="modal-body">
+                        <h4>Bạn làm buồi j có quyền ? ơ </h4>
+                    </div>
+                @endisATC
         </div>
     </div>
 </div>
+
 {{-- End - Delete Modal --}}
 <div class="container py-5">
     <div class="row">
@@ -197,6 +210,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
   integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
 <script>
     $(document).ready(function(){
         fetchjuice();
@@ -208,11 +222,14 @@
                 success: function(response){
                     $('tbody').html("");
                     $.each(response.juices,function(key,item){
+                        var img
                         $('tbody').append('<tr>\
                                 <td>' +item.id + '</td>\
                                 <td>' +item.juicename + '</td>\
                                 <td>' +item.number + '</td>\
-                                <td>' +item.image + '</td>\
+                                <td>\
+                                    <img src="' +item.image+ '" width="150px">\
+                                </td>\
                                 <td>' +item.nicotin + '</td>\
                                 <td>' +item.flavor + '</td>\
                                 <td>' +item.brand + '</td>\
@@ -220,13 +237,14 @@
                                 <td>' +item.sellingprice + '</td>\
                                 <td>\
                                     <button type="button" value="' + item.id + '" class="btn btn-primary editbtn btn-sm">Edit</button>\
-                                    <button type="button" value="' + item.id + '" class="btn btn-danger deletebtn btn-sm">Delete</button>\
+                                    <button  type="button" value="' + item.id + '" class="btn btn-danger deletebtn btn-sm" @unlessisATC disabled @endunless>Delete</button>\
                                 </td>\
                             \</tr>');
                     });
                 }
             })
         }
+        
         $(document).on('click','.add_juice',function(e){
             e.preventDefault();
             var data = {
@@ -271,7 +289,7 @@
                 }
                 
             });
-        })
+        });
         $(document).on('click','.editbtn',function(e){
             e.preventDefault();
             var juice_id = $(this).val();
@@ -389,5 +407,12 @@
             });
         });
     });
+</script>
+<script>
+    $('#lfm').filemanager('image');
+</script>
+<script>
+    var route_prefix = "laravel-filemanager";
+    $('#lfm').filemanager('image', {prefix: route_prefix});
 </script>
 @endsection
