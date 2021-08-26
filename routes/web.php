@@ -12,7 +12,9 @@ Route::delete('delete-juice/{id}',[JuiceController::class,'destroy']);
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function (){
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
