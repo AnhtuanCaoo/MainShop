@@ -170,9 +170,9 @@
                         <button type="button" class="btn btn-primary delete_juice">Yes!</button>
                     </div>
                 
-                @else
+                @else  
                     <div id="warning" class="modal-body">
-                        <h4>Bạn làm buồi j có quyền ? ơ </h4>
+                        <h4>Bạn làm j có quyền ? ơ </h4>
                     </div>
                 @endisATC
         </div>
