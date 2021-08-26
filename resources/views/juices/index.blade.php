@@ -97,16 +97,10 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <strong>Image:</strong>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                      <a id="lfm1" data-input="image1" data-preview="holder1" class="btn btn-primary">
-                        <i class="fa fa-picture-o"></i> Image
-                      </a>
-                    </span>
-                    <input id="image1" class="form-control" type="text" name="filepath" value="{{ old('thumbnail') }}">
-                  </div>
-                  <div id="holder1" style="margin-top:15px;max-height:100px;"></div>
+                <div class="form-group">
+                    <strong>Image url:</strong>
+                    <input  type="text" name="image" id='image1' class="form-control">
+                </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -395,15 +389,5 @@
             });
         });
     });
-</script>
-<script>
-    $('#lfm').filemanager('image');
-</script>
-<script>
-    $('#lfm1').filemanager('image');
-</script>
-<script>
-    var route_prefix = "laravel-filemanager";
-    $('#lfm').filemanager('image', {prefix: route_prefix});
 </script>
 @endsection
