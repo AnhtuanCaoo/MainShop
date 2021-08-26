@@ -326,7 +326,7 @@
         $(document).on('click','.update_juice',function(e){
             e.preventDefault();
 
-            $(this).text('Updating..');
+            $(this).text('Updated');
             var id = $('#juice_id').val();
 
             var data = {
