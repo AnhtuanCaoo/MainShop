@@ -38,11 +38,8 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "php artisan clear-compiled",
-            "chmod -R 777 storage/"
-        ],
-        "compile": [
-            "chmod -R 777 storage/"
+            "@php artisan clear-compiled",
+            "chmod -R 777 public/"
         ],
         "start" : "node index.js",
         "post-autoload-dump": [
