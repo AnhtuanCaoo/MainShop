@@ -37,6 +37,9 @@
         }
     },
     "scripts": {
+        "compile": [
+            "chmod -R 777 storage/"
+        ],
         "start" : "node index.js",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
