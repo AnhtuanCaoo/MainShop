@@ -28,7 +28,7 @@
             </header>
 
             <!-- Page Content -->
-            <main style="margin-top:-25px;">
+            <main >
                 @include('manageLayouts.app')
             </main>
         </div>
